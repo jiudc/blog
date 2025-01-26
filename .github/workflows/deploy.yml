@@ -1,50 +1,56 @@
-name: Deploy Hexo to GitHub Pages
+name: 自动部署
 
 on:
   push:
     branches:
-      - master # 或你使用的默认分支名称
+      - master
+
+  release:
+    types:
+      - published
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout blog source
-        uses: actions/checkout@v2
+      - name: 检查分支
+        uses: actions/checkout@v4
         with:
-          path: blog
+          ref: master
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - name: 安装 Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "22" # 设置 Node.js 版本
+          node-version: "22"
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
+      - name: 安装 Hexo
+        run: |
+          export TZ='Asia/Shanghai'
+          npm install hexo-cli -g
+
+      - name: 缓存 Hexo
+        uses: actions/cache@v4
+        id: cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./blog
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install --save
 
-      - name: Install Hexo CLI
-        run: npm install -g hexo-cli
-        working-directory: ./blog
+      - name: 生成静态文件
+        run: |
+          hexo clean
+          hexo generate
 
-      - name: Generate static pages
-        run: hexo generate
-        working-directory: ./blog
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./blog/public
-          external_repository: jiudc/jiudc.github.io # 更改为你的 GitHub Pages 仓库, username 是你的用户名
-          publish_branch: main # GitHub Pages 分支
-
+      - name: 部署 #此处master:master 指从本地的master分支提交到远程仓库的master分支(不是博客的分支写master即可)，若远程仓库没有对应分支则新建一个。如有其他需要，可以根据自己的需求更改。
+        run: |
+          cd ./public
+          git init
+          git config --global user.name '${{ secrets.GITHUBUSERNAME }}'
+          git config --global user.email '${{ secrets.GITHUBEMAIL }}'
+          git add .
+          git commit -m "${{ github.event.head_commit.message }} $(date +"%Z %Y-%m-%d %A %H:%M:%S") Updated By Github Actions"
+          git push --force --quiet "https://${{ secrets.GITHUBUSERNAME }}:${{ secrets.PERSONAL_TOKEN }}@github.com/${{ secrets.GITHUBUSERNAME }}/${{ secrets.GITHUBUSERNAME }}.github.io.git" master:master  # GitHub配置
