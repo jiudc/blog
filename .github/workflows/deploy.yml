@@ -18,6 +18,7 @@ jobs:
         with:
           ref: master
           submodules: true
+          fetch-depth: 1
 
       - name: 安装 Node
         uses: actions/setup-node@v4
