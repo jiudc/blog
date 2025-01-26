@@ -26,7 +26,7 @@ jobs:
       - name: 安装 Hexo
         run: |
           export TZ='Asia/Shanghai'
-          npm install hexo-cli -g
+          npm install hexo-cli hexo-renderer-pug hexo-renderer-stylus hexo-generator-topindex hexo-generator-search -g
 
       - name: 缓存 Hexo
         uses: actions/cache@v4
@@ -38,7 +38,6 @@ jobs:
       - name: 安装依赖
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          npm install -g hexo-cli hexo-renderer-pug hexo-renderer-stylus hexo-generator-topindex hexo-generator-search
           npm install --save
 
       - name: 生成静态文件
