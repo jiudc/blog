@@ -70,4 +70,4 @@ jobs:
           echo '>_ Start Commit ...'
           git commit --allow-empty -m "Github Action Automated Deployment $(date +'%Y-%m-%d %H:%M:%S')"
           echo '>_ Start Push ...'
-          git push -u origin ${{DEPLOY_BRANCH}} --force
+          git push -u origin ${{DEPLOY_BRANCH}} --force master:main
