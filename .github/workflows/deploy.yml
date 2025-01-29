@@ -29,6 +29,7 @@ jobs:
         run: |
           export TZ='Asia/Shanghai'
           npm install -g hexo-cli hexo hexo-renderer-pug hexo-renderer-stylus hexo-generator-topindex hexo-generator-search
+          npm install -g hexo-wordcount
           npm install
 
       - name: 缓存 Hexo
