@@ -72,7 +72,7 @@ social:
 author_status:
   enable: true
   # 可以是任何图片，建议放表情包或者emoji图片，效果都很好，[表情包速查](https://emotion.xiaokang.me/)
-  statusImg: "https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png"
+  statusImg: "https://cloudflare-imgbed-8ig.pages.dev/file/1738728953036_站在锅里面的小女孩.png"
   skills:
     # - 🤖️ 数码科技爱好者
     # - 🔍 分享与热心帮助
