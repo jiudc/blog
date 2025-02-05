@@ -34,7 +34,7 @@ nav:
     - title: 项目
       item:
         - name: 图床
-          link: https://telegraph-image-4sc.pages.dev/
+          link: https://cloudflare-imgbed-8ig.pages.dev/
           icon: https://image.anheyu.com/favicon.ico
 
 # mourn （哀悼日，指定日期网站简单变灰，不包括滚动条）
