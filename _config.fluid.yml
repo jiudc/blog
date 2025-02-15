@@ -1029,21 +1029,21 @@ links:
   # Member item of page
   items:
     - {
-      title: "Fluid Blog",
-      intro: "主题博客",
-      link: "https://hexo.fluid-dev.com/",
+      title: "Charles's Blog",
+      intro: "博客",
+      link: "https://jiudc-github-io.pages.dev/",
       avatar: "/img/favicon.png"
     }
     - {
-      title: "Fluid Docs",
+      title: "我的图床",
       intro: "主题使用指南",
-      link: "https://hexo.fluid-dev.com/docs/",
+      link: "https://cloudflare-imgbed-8ig.pages.dev/",
       avatar: "/img/favicon.png"
     }
     - {
-      title: "Fluid Repo",
+      title: "Git Repo",
       intro: "主题 GitHub 仓库",
-      link: "https://github.com/fluid-dev/hexo-theme-fluid",
+      link: "https://github.com/jiudc",
       avatar: "/img/favicon.png"
     }
 
