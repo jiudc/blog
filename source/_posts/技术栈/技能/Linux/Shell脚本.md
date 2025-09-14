@@ -1,7 +1,8 @@
 ---
 title: Shell脚本
 categories:
-  - 工作
+  - 技术栈
+  - 技能
   - Linux
 tags:
   - shell
